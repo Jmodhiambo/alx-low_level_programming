@@ -28,7 +28,7 @@ int main(void)
 		n1 = n2;
 		n2 = sum;
 	}
-	printf("%d", sumEven);
+	printf("%d", sumEven + 2);
 	printf("\n");
 
 	return (0);
