@@ -1,4 +1,4 @@
-#include "math.h"
+#include "main.h"
 #include <stdio.h>
 
 /**
@@ -15,7 +15,7 @@ int print_last_digit(int x)
 	if (n < 0)
 		n = -n;
 
-	putchar(n + '0');
+	_putchar(n + '0');
 
 	return (n);
 }
