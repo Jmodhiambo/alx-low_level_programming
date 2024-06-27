@@ -13,7 +13,7 @@ int main(void)
 
 	i = 0;
 
-	while (i < 10) /*There is no i++ to increment i*/
+	while (i < 10) /* There is no i++ to increment i */
 	{
 		putchar(i);
 	}
