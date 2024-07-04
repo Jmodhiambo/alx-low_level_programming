@@ -15,33 +15,28 @@ char *cap_string(char *str)
 
 	while (str[i] != '\0')
 	{
-		/* Check if the current character is a separator */
+		int is_separator = 0;
+
 		for (j = 0; separators[j] != '\0'; j++)
 		{
 			if (str[i] == separators[j])
 			{
-				cap_next = 1;
+				is_separator = 1;
 				break;
 			}
 		}
 
-		/* Capitalize the current character if needed */
 		if (cap_next && str[i] >= 'a' && str[i] <= 'z')
 		{
 			str[i] = str[i] - 32;
-			cap_next = 0;
 		}
-		else if (str[i] >= 'A' && str[i] <= 'Z')
+		if (is_separator)
 		{
-			cap_next = 0;
-		}
-		else if (str[i] >= '0' && str[i] <= '9')
-		{
-			cap_next = 0;
+			cap_next = 1;
 		}
 		else
 		{
-			cap_next = 1;
+			cap_next = 0;
 		}
 
 		i++;
