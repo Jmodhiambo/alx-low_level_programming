@@ -11,17 +11,19 @@
 
 int main(int argc, char *argv[])
 {
-	int multi = 0;
+	int num1, num2, multi;
 
-	if (argc > 1)
-	{
-		multi = atol(argv[1]) * atol(argv[2]);
-		printf("%d\n", multi);
-	}
-	else
+	if (argc != 3)
 	{
 		printf("Error\n");
 		return (1);
 	}
+
+	num1 = atoi(argv[1]);
+	num2 = atoi(argv[2]);
+	multi = num1 * num2;
+
+	printf("%d\n", multi);
+
 	return (0);
 }
