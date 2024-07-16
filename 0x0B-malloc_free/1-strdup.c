@@ -15,23 +15,21 @@ char *_strdup(char *str)
 	int i = 0;
 	int j = 0;
 
-	while (str[i] != '\0')
-		i++;
-
 	if (str == NULL)
 		return (NULL);
+
+	while (str[i] != '\0')
+		i++;
 
 	ptr = (char *)malloc(i + 1);
 
 	if (ptr == NULL)
 		return (NULL);
-	j = i;
-	i = 0;
 
-	for (i = 0; i <= j; i++)
+	for (j = 0; j <= i; j++)
 	{
-		ptr[i] = str[i];
+		ptr[j] = str[j];
 	}
-	ptr[i] = '\0';
+	ptr[j] = '\0';
 	return (ptr);
 }
