@@ -3,6 +3,14 @@
 
 #include <stddef.h>
 
+/**
+* struct list_s - singly linked list
+* @str: string - (malloc'ed string)
+* @len: length of the string
+* @next: points to the next node
+*
+* Description: singly linked list node structure
+*/
 typedef struct list_s
 {
 	char *str;
@@ -13,15 +21,6 @@ typedef struct list_s
 
 int _putchar(char c);
 size_t print_list(const list_t *h);
-
-/**
-* struct list_s - singly linked list
-* @str: string - (malloc'ed string)
-* @len: length of the string
-* @next: points to the next node
-*
-* Description: singly linked list node structure
-*/
 
 
 #endif /* LISTS_H*/
