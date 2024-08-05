@@ -15,7 +15,3 @@ _start:
     mov rax, 60            ; System call number for sys_exit
     xor rdi, rdi           ; Exit code 0
     syscall                ; Invoke the system call
-
-section .note.GNU-stack
-    db 0
-
