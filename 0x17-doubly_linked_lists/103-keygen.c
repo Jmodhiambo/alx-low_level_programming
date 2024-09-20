@@ -1,31 +1,36 @@
-/**
- * keygen5 - Generates a key based on the provided username
- * @username: the username to generate a key for
- *
- * Return: void (prints the key)
- */
 #include <stdio.h>
 #include <string.h>
 
+/**
+* main - Generates a key based on the provided username
+* @argc: The argument count
+* @argv: The argument vector (array of strings)
+*
+* Return: 0 on success, 1 if the incorrect number of arguments is provided
+*/
+
 int main(int argc, char *argv[])
 {
-        if (argc != 2)
-        {
-                printf("Usage: %s username\n", argv[0]);
-                return (1);
-        }
+	char *username;
+	int len, key, i;
 
-        char *username = argv[1];
-        int len = strlen(username);
-        int key = 0;
+	if (argc != 2)
+	{
+		printf("Usage: %s username\n", argv[0]);
+		return (1);
+	}
 
-        for (int i = 0; i < len; i++)
-        {
-                key += username[i];
-        }
+	username = argv[1];
+	len = strlen(username);
+	key = 0;
 
-        key = (key ^ 0x4f) & 0xff;  // Hypothetical transformation
+	for (i = 0; i < len; i++)
+	{
+		key += username[i];
+	}
 
-        printf("%d\n", key);
-        return (0);
+	key = (key ^ 0x4f) & 0xff;
+
+	printf("%d\n", key);
+	return (0);
 }
