@@ -40,7 +40,7 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 	if (ptr->prev != NULL)
 		ptr->prev->next = ptr->next;
 
-        free(ptr);
+	free(ptr);
 	return (1);
 
 }
