@@ -31,7 +31,7 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 		return (new);
 	}
 
-	while (ptr != NULL)
+	while (ptr)
 	{
 		if (pos == idx)
 		{
@@ -41,6 +41,10 @@ dlistint_t *insert_dnodeint_at_index(dlistint_t **h, unsigned int idx, int n)
 			new->n = n;
 
 			return (new);
+		}
+		if (pos > idx)
+		{
+			return (NULL);
 		}
 		pos++;
 		ptr = ptr->next;
