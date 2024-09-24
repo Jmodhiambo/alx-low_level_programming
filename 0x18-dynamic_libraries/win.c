@@ -5,7 +5,7 @@
 /**
 * rand - takes my numbers as random generated
 */
-int rand() {
+int rand(void) {
  	static int numbers[] = {9, 8, 10, 24, 75, 9};
 	static int index = 0;
 	if (index < 6)
