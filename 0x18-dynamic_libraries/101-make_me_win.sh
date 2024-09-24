@@ -1,2 +1,2 @@
 #!/bin/bash
-export LD_PRELOAD=$PWD/win.so
+export LD_PRELOAD=. ./win.so
