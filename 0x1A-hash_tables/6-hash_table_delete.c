@@ -28,10 +28,8 @@ void hash_table_delete(hash_table_t *ht)
 			node = node->next;
 			free(temp->key);
 			free(temp->value);
-			free(temp->next);
+			free(temp);
 		}
-		free(node);
-		free(ht->array[index]);
 	}
 
 	free(ht->array);
