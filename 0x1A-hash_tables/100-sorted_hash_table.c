@@ -237,3 +237,35 @@ void shash_table_print_rev(const shash_table_t *ht)
 	}
 	printf("}\n");
 }
+
+/**
+ * shash_table_delete - Deletes a hash table.
+ * @ht: The hash table.
+ *
+ * Return: void.
+ */
+void shash_table_delete(shash_table_t *ht)
+{
+	unsigned int index = 0;
+	shash_node_t *node, *temp;
+
+	while (index < ht->size)
+	{
+		node = ht->array[index];
+
+		while (node != NULL)
+		{
+			temp = node;
+			node = node->next;
+
+			free(temp->key);
+			free(temp->value);
+			free(temp);
+		}
+
+		index += 1;
+
+	}
+	free(ht->array);
+	free(ht);
+}

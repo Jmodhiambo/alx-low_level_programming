@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 /**
-* hash_table_delete - Prints the key-value pairs in a hash table.
+* hash_table_delete - Deletes a hash table.
 * @ht: The hash table.
 *
 * Return: void.
