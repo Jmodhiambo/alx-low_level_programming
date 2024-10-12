@@ -3,6 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
+void shash_table_insert_sorted(shash_table_t *ht, shash_node_t *new_node,
+				const char *key);
+
 /**
 * shash_table_create - creates a hash table
 * @size: size of the hash table
@@ -45,7 +48,7 @@ shash_table_t *shash_table_create(unsigned long int size)
 
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-	shash_node_t *new_node, *temp, *prev;
+	shash_node_t *new_node, *temp;
 	unsigned int index;
 
 	if (ht == NULL || key == NULL || strlen(key) == 0)
@@ -63,11 +66,9 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 			if (temp->value == NULL)
 				return (0);
 			return (1);
-
 		}
 		temp = temp->snext;
 	}
-
 	new_node = malloc(sizeof(shash_node_t));
 	if (new_node == NULL)
 		return (0);
@@ -84,12 +85,27 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	/* Add the node to the hash table's linked list at the index */
 	new_node->next = ht->array[index];
 	ht->array[index] = new_node;
-
 	/* Now, insert the new node into the sorted linked list */
+	shash_table_insert_sorted(ht, new_node, key);
+
+	return (1);
+}
+
+/**
+ * shash_table_insert_sorted - Inserts a node into the sorted linked list
+ * @ht: The sorted hash table
+ * @new_node: The new node to insert
+ * @key: The key of the new node
+ * Return: void
+ */
+void shash_table_insert_sorted(shash_table_t *ht, shash_node_t *new_node,
+				const char *key)
+{
+	shash_node_t *temp, *prev = NULL;
+
 	if (ht->shead == NULL)
 	{
-		/* First element in the sorted list */
-		new_node->snext = NULL;
+		new_node->snext = NULL; /* Code block: First element in the sorted list */
 		new_node->sprev = NULL;
 		ht->shead = new_node;
 		ht->stail = new_node;
@@ -97,41 +113,34 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	else
 	{
 		temp = ht->shead;
-		prev = NULL;
-
 		/* Traverse the sorted list to find the correct position */
 		while (temp != NULL && strcmp(temp->key, key) < 0)
 		{
 			prev = temp;
 			temp = temp->snext;
 		}
-
-		/* Insert at the beginning of the list */
 		if (prev == NULL)
 		{
-			new_node->snext = ht->shead;
+			new_node->snext = ht->shead;  /* Insert at the beginning of the list */
 			new_node->sprev = NULL;
 			ht->shead->sprev = new_node;
 			ht->shead = new_node;
 		}
-		/* Insert at the end of the list */
 		else if (temp == NULL)
 		{
-			new_node->snext = NULL;
+			new_node->snext = NULL; /* Insert at the end of the list */
 			new_node->sprev = ht->stail;
 			ht->stail->snext = new_node;
 			ht->stail = new_node;
 		}
-		/* Insert in the middle of the list */
 		else
 		{
-			new_node->snext = temp;
+			new_node->snext = temp; /* Insert in the middle of the list */
 			new_node->sprev = prev;
 			prev->snext = new_node;
 			temp->sprev = new_node;
 		}
 	}
-	return (1);
 }
 /**
 * shash_table_get - Retrieves a value associated with a key.
