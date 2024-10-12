@@ -206,3 +206,34 @@ void shash_table_print(const shash_table_t *ht)
 
 	printf("}\n");
 }
+
+/**
+ * shash_table_print_rev - Prints the key-value pairs in reverse.
+ * @ht: The hash table.
+ *
+ * Return: void.
+ */
+
+void shash_table_print_rev(const shash_table_t *ht)
+{
+	shash_node_t *node;
+	int first = 1;
+
+	if (ht == NULL)
+		return;
+
+	printf("{");
+
+	node = ht->stail;
+
+	while (node != NULL)
+	{
+		if (!first)
+			printf(", ");
+		printf("'%s': '%s'", node->key, node->value);
+		first = 0;
+
+		node = node->sprev;
+	}
+	printf("}\n");
+}
