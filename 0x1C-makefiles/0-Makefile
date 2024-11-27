@@ -5,3 +5,5 @@ school: school.o main.o
 
 %.o: %.c %.h
 	gcc -c $< -o $@
+clean:
+	rm *.o school
