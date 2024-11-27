@@ -1,0 +1,7 @@
+all: school
+
+school: school.o main.o
+	gcc school.o main.o -o school
+
+%.o: %.c %.h
+	gcc -c $< -o $@
