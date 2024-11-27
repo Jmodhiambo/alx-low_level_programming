@@ -1,15 +1,15 @@
 CC = gcc
 SRC = school.c main.c
-OBJ = school.o main.o
+OBJ = $(SRC:.c=.o)  # Automatically derive .o files from .c files
 NAME = school
 
 
 all: $(NAME)
 
-school: ${OBJ}
-	${CC} ${OBJ} -o school
+$(NAME): ${OBJ}
+	${CC} ${OBJ} -o $(NAME)
 
 %.o: %.c %.h
-	${CC} -c ${SRC} -o $@
+	${CC} -c $< -o $@
 clean:
-	rm *.o school
+	rm -f $(OBJ) $(NAME)
