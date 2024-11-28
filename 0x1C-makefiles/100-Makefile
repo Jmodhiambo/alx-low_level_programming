@@ -10,10 +10,10 @@ ${NAME}: ${OBJ}
 	${CC} $^ -o $@  # ^ represents all the prerequisites ie OBJ in this case
 
 clean:
-	rm -f *~ ${NAME}
+	$(RM) *~ ${NAME}
 
 oclean:
-	rm -f ${OBJ}
+	$(RM) ${OBJ}
 
 fclean: clean oclean
 
