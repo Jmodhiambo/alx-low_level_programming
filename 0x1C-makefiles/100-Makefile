@@ -4,10 +4,8 @@ SRC = school.c main.c
 OBJ = ${SRC:.c=.o}  # Automatically derive .o files from .c files
 NAME = school
 
-all: ${NAME}
-
-${NAME}: ${OBJ}
-	${CC} $^ -o $@  # ^ represents all the prerequisites ie OBJ in this case
+all: ${OBJ}
+	${CC} ${OBJ} -o ${NAME}  # ^ represents all the prerequisites ie OBJ in this case
 
 clean:
 	$(RM) *~ ${NAME}
