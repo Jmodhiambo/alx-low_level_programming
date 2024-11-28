@@ -3,7 +3,6 @@ CC = gcc ${CFLAGS}
 SRC = school.c main.c
 OBJ = ${SRC:.c=.o}  # Automatically derive .o files from .c files
 NAME = school
-RM = rm -f
 
 all: ${NAME}
 
@@ -11,11 +10,12 @@ ${NAME}: ${OBJ}
 	${CC} $^ -o $@  # ^ represents all the prerequisites ie OBJ in this case
 
 clean:
-	${RM} *~ ${NAME}
+	rm -f *~ ${NAME}
+
 oclean:
-	${RM} ${OBJ}
+	rm -f ${OBJ}
+
 fclean: clean oclean
-	@true  # prevent failing
 
 # Force recompilation
 re: oclean all
