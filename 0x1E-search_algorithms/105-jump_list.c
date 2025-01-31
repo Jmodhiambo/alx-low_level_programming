@@ -3,49 +3,49 @@
 #include <stdio.h>
 
 /**
- * jump_list - Searches for a value in a sorted singly linked list
- *              using Jump Search.
- * @list: Pointer to the head of the list.
- * @size: Number of nodes in the list.
- * @value: The value to search for.
+ * jump_list - searches for a value in an array of
+ * integers using the Jump search algorithm
  *
- * Return: Pointer to the first node where value is located or NULL.
+ * @list: input list
+ * @size: size of the array
+ * @value: value to search in
+ * Return: index of the number
  */
 listint_t *jump_list(listint_t *list, size_t size, int value)
 {
-	size_t step, i;
-	listint_t *prev, *curr;
+	size_t index, k, m;
+	listint_t *prev;
 
-	if (!list || size == 0)
+	if (list == NULL || size == 0)
 		return (NULL);
 
-	step = sqrt(size);
-	prev = list;
-	curr = list;
+	m = (size_t)sqrt((double)size);
+	index = 0;
+	k = 0;
 
-	/* Jump search */
-	while (curr->next && curr->n < value)
+	do {
+		prev = list;
+		k++;
+		index = k * m;
+
+		while (list->next && list->index < index)
+			list = list->next;
+
+		if (list->next == NULL && index != list->index)
+			index = list->index;
+
+		printf("Value checked at index [%d] = [%d]\n", (int)index, list->n);
+
+	} while (index < size && list->next && list->n < value);
+
+	printf("Value found between indexes ");
+	printf("[%d] and [%d]\n", (int)prev->index, (int)list->index);
+
+	for (; prev && prev->index <= list->index; prev = prev->next)
 	{
-		prev = curr;
-		for (i = 0; curr->next && i < step; i++)
-			curr = curr->next;
-
-		printf("value checked at index [%lu] = [%d]\n" curr->index, curr->n);
-	}
-
-	char value[] = "Value found between indexes [%lu] and [%lu]\n"
-
-	printf(value, prev->index, curr->index);
-
-	/* Linear search in the block */
-	while (prev && prev->index <= curr->index)
-	{
-		printf("Value checked at index [%lu] = [%d]\n", prev->index, prev->n);
-
+		printf("Value checked at index [%d] = [%d]\n", (int)prev->index, prev->n);
 		if (prev->n == value)
 			return (prev);
-
-		prev = prev->next;
 	}
 
 	return (NULL);
