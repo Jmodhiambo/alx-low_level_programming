@@ -10,46 +10,46 @@
  */
 skiplist_t *linear_skip(skiplist_t *list, int value)
 {
-    skiplist_t *express_lane, *block_start;
+    skiplist_t *prev, *current;
 
     if (!list)
         return (NULL);
 
-    express_lane = list;
+    prev = list;
+    current = list->express;
 
-    /* Jumping phase using express lane */
-    while (express_lane->express && express_lane->express->n < value)
+    /* Traverse express lane first */
+    while (current)
     {
-        printf("Value checked at index [%lu] = [%d]\n",
-               express_lane->express->index, express_lane->express->n);
-        express_lane = express_lane->express;
+        printf("Value checked at index [%lu] = [%d]\n", current->index, current->n);
+
+        if (current->n >= value)
+            break;
+
+        prev = current;
+        current = current->express;
     }
 
-    /* Define the start of the linear search */
-    block_start = express_lane;
-    if (express_lane->express)
+    /* Identify block where value might exist */
+    if (!current)
     {
-        express_lane = express_lane->express;
-    }
-    else
-    {
-        /* If no express lane left, go to the end of the list */
-        while (express_lane->next)
-            express_lane = express_lane->next;
+        current = prev;
+        while (current->next)
+            current = current->next;
     }
 
     printf("Value found between indexes [%lu] and [%lu]\n",
-           block_start->index, express_lane->index);
+           prev->index, current->index);
 
     /* Linear search within the identified block */
-    while (block_start && block_start->index <= express_lane->index)
+    while (prev && prev->index <= current->index)
     {
-        printf("Value checked at index [%lu] = [%d]\n",
-               block_start->index, block_start->n);
+        printf("Value checked at index [%lu] = [%d]\n", prev->index, prev->n);
 
-        if (block_start->n == value)
-            return (block_start);
-        block_start = block_start->next;
+        if (prev->n == value)
+            return (prev);
+
+        prev = prev->next;
     }
 
     return (NULL);
