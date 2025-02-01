@@ -47,7 +47,7 @@ listint_t *jump_list(listint_t *list, size_t size, int value)
 	while (block_start && block_start->index <= list->index)
 	{
 		b = block_start;
-		printf("Value checked at index [%lu] = [%d]\n", b->index, b_start->n);
+		printf("Value checked at index [%lu] = [%d]\n", b->index, b->n);
 		if (block_start->n == value)
 			return (block_start);
 		block_start = block_start->next;
